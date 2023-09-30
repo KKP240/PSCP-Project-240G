@@ -36,7 +36,7 @@ text_rect = text_startbutton.get_rect(center=start_button.center)
 #เสียง mainmenu audio
 mixer.music.load("audio/mainmenu.mp3")
 mixer.music.set_volume(0.3)
-mixer.music.play()
+mixer.music.play(loops=1)
 
 flyspeed = 0
 running = True
@@ -54,7 +54,6 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if start_button.collidepoint(event.pos):
                 pass
-        mixer.music.unpause()
     screen.blit(dinosaur_img, (flyspeed, 0))
     screen.blit(message_text, (420, 200))
     pygame.draw.rect(screen, (0, 128, 255), start_button)
