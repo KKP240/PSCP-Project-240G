@@ -14,7 +14,7 @@ class Mainmenu:
         self.screen = pygame.display.set_mode((self.screen_w, self.screen_h))
 
         #ขัอความและฟอนต์
-        self.fontcolor_mainmenu = (180, 180, 179)
+        self.fontcolor_mainmenu = (247, 127, 0)
         self.sys_font = pygame.font.SysFont("capriolaregular", 108)
         self.message_text = self.sys_font.render("JustType", True, self.fontcolor_mainmenu)
 
@@ -23,12 +23,15 @@ class Mainmenu:
         pygame.display.set_icon(self.icon)
         pygame.display.set_caption("JustType")
 
-        #dinosaur ลอยไปมา
-        self.dinosaur_img = pygame.image.load("images/dinosaur.png")
-        self.dinosaur_img = pygame.transform.scale(self.dinosaur_img, (200, 300))
+        #background image
+        self.background_image = pygame.image.load("images/gamebackground.jpg")
+
+        #ตัว cartoon วิ่ง
+        self.cartoon_img = pygame.image.load("images/cartoon2.png")
+        self.cartoon_img = pygame.transform.scale(self.cartoon_img, (100, 100))
 
         #ปุ่ม Start
-        self.start_button = pygame.Rect(540, 400, 200, 50)
+        self.start_button = pygame.Rect(540, 380, 200, 50)
         self.font_button = pygame.font.SysFont("capriolaregular", 36)
         self.text_startbutton = self.font_button.render("Start", True, (255, 255, 255))
         self.text_rect = self.text_startbutton.get_rect(center=self.start_button.center)
@@ -38,7 +41,7 @@ class Mainmenu:
         mixer.music.set_volume(0.3)
         mixer.music.play(loops=1)
 
-        self.flyspeed = 0
+        self.runspeed = 0
         self.running = True
 
     def runprogram(self):
@@ -57,11 +60,12 @@ class Mainmenu:
                         nextpage = Typingpage()
                         nextpage.runprogram()
 
-            self.screen.blit(self.dinosaur_img, (self.flyspeed, (self.screen_h)-780))
-            self.screen.blit(self.message_text, (420, 200))
+            self.screen.blit(self.background_image, (-100,-200))
+            self.screen.blit(self.cartoon_img, (self.runspeed, (self.screen_h)-130))
+            self.screen.blit(self.message_text, (420, 180))
             pygame.draw.rect(self.screen, (0, 128, 255), self.start_button)
             self.screen.blit(self.text_startbutton, self.text_rect)
-            self.flyspeed += 0.2
+            self.runspeed += 0.18
             pygame.display.flip()
         pygame.quit()
 
