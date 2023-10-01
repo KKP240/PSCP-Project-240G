@@ -2,15 +2,16 @@ import pygame
 from pygame import mixer
 
 class Mainmenu:
+    """MainPage"""
     def __init__(self):
         #เรียกใช้งาน pygame, audio
         pygame.init()
         mixer.init()
 
         #หน้าจอโปรแกรม
-        self.SCREEN_W = 1280
-        self.SCREEN_H = 720
-        self.screen = pygame.display.set_mode((self.SCREEN_W, self.SCREEN_H))
+        self.screen_w = 1280
+        self.screen_h = 720
+        self.screen = pygame.display.set_mode((self.screen_w, self.screen_h))
 
         #ขัอความและฟอนต์
         self.fontcolor_mainmenu = (180, 180, 179)
@@ -41,6 +42,53 @@ class Mainmenu:
         self.running = True
 
     def runprogram(self):
+        """runprogram"""
+        while self.running:
+            for event in pygame.event.get():
+                #กากบาทปิดจบการทำงาน
+                if event.type == pygame.QUIT:
+                    self.running = False
+                #กด ESC ปิดจบการทำงาน
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    if self.start_button.collidepoint(event.pos):
+                        nextpage = Typingpage()
+                        nextpage.runprogram()
+
+            self.screen.blit(self.dinosaur_img, (self.flyspeed, (self.screen_h)-780))
+            self.screen.blit(self.message_text, (420, 200))
+            pygame.draw.rect(self.screen, (0, 128, 255), self.start_button)
+            self.screen.blit(self.text_startbutton, self.text_rect)
+            self.flyspeed += 0.2
+            pygame.display.flip()
+        pygame.quit()
+
+class Typingpage:
+    """TypingTestPage"""
+    def __init__(self):
+        pygame.init()
+
+        #หน้าจอโปรแกรม
+        self.screen_w = 1280
+        self.screen_h = 720
+        self.screen = pygame.display.set_mode((self.screen_w, self.screen_h))
+
+        #ขัอความและฟอนต์
+        self.fontcolor_mainmenu = (180, 180, 179)
+        self.sys_font = pygame.font.SysFont("capriolaregular", 108)
+        self.message_text = self.sys_font.render("JustType", True, self.fontcolor_mainmenu)
+
+        #ไอคอนและชื่อโปรแกรม
+        self.icon = pygame.image.load("images/icon.png")
+        pygame.display.set_icon(self.icon)
+        pygame.display.set_caption("JustType")
+
+        self.running = True
+
+    def runprogram(self):
+        """runprogram"""
         while self.running:
             for event in pygame.event.get():
                 #กากบาทปิดจบการทำงาน
@@ -51,13 +99,9 @@ class Mainmenu:
                     if event.key == pygame.K_ESCAPE:
                         self.running = False
 
-            self.screen.blit(self.dinosaur_img, (self.flyspeed, (self.SCREEN_H)-780))
             self.screen.blit(self.message_text, (420, 200))
-            pygame.draw.rect(self.screen, (0, 128, 255), self.start_button)
-            self.screen.blit(self.text_startbutton, self.text_rect)
-            self.flyspeed += 0.2
             pygame.display.flip()
-
+            mixer.music.stop()
         pygame.quit()
 
 if __name__ == "__main__":
