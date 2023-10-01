@@ -27,7 +27,7 @@ class Mainmenu:
         self.background_image = pygame.image.load("images/gamebackground.jpg")
 
         #ตัว cartoon วิ่ง
-        self.cartoon_img = pygame.image.load("images/cartoon2.png")
+        self.cartoon_img = pygame.image.load("images/cartoon.png")
         self.cartoon_img = pygame.transform.scale(self.cartoon_img, (100, 100))
 
         #ปุ่ม Start
