@@ -1,5 +1,7 @@
 import pygame
 from pygame import mixer
+import webbrowser
+import asyncio
 
 class Mainmenu:
     """MainPage"""
@@ -44,21 +46,15 @@ class Mainmenu:
         self.runspeed = 0
         self.running = True
 
-    def runprogram(self):
+    async def runprogram(self):
         """runprogram"""
         while self.running:
             for event in pygame.event.get():
-                #กากบาทปิดจบการทำงาน
-                if event.type == pygame.QUIT:
-                    self.running = False
-                #กด ESC ปิดจบการทำงาน
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        self.running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.start_button.collidepoint(event.pos):
-                        nextpage = Typingpage()
-                        nextpage.runprogram()
+                        webbrowser.open_new("itf-it66070063.vercel.app")
+                elif event.type == pygame.QUIT:
+                    self.running = False
 
             self.screen.blit(self.background_image, (-100,-200))
             self.screen.blit(self.cartoon_img, (self.runspeed, (self.screen_h)-130))
@@ -67,47 +63,8 @@ class Mainmenu:
             self.screen.blit(self.text_startbutton, self.text_rect)
             self.runspeed += 0.18
             pygame.display.flip()
-        pygame.quit()
-
-class Typingpage:
-    """TypingTestPage"""
-    def __init__(self):
-        pygame.init()
-
-        #หน้าจอโปรแกรม
-        self.screen_w = 1280
-        self.screen_h = 720
-        self.screen = pygame.display.set_mode((self.screen_w, self.screen_h))
-
-        #ขัอความและฟอนต์
-        self.fontcolor_mainmenu = (180, 180, 179)
-        self.sys_font = pygame.font.SysFont("capriolaregular", 108)
-        self.message_text = self.sys_font.render("JustType", True, self.fontcolor_mainmenu)
-
-        #ไอคอนและชื่อโปรแกรม
-        self.icon = pygame.image.load("images/icon.png")
-        pygame.display.set_icon(self.icon)
-        pygame.display.set_caption("JustType")
-
-        self.running = True
-
-    def runprogram(self):
-        """runprogram"""
-        while self.running:
-            for event in pygame.event.get():
-                #กากบาทปิดจบการทำงาน
-                if event.type == pygame.QUIT:
-                    self.running = False
-                #กด ESC ปิดจบการทำงาน
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        self.running = False
-
-            self.screen.blit(self.message_text, (420, 200))
-            pygame.display.flip()
-            mixer.music.stop()
-        pygame.quit()
+            await asyncio.sleep(0)
 
 if __name__ == "__main__":
     game = Mainmenu()
-    game.runprogram()
+    asyncio.run(game.runprogram())
