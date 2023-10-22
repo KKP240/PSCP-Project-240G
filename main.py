@@ -52,7 +52,7 @@ class Mainmenu:
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.start_button.collidepoint(event.pos):
-                        webbrowser.open_new("itf-it66070063.vercel.app")
+                        webbrowser.open("justtype.vercel.app")
                 elif event.type == pygame.QUIT:
                     self.running = False
 
@@ -64,6 +64,8 @@ class Mainmenu:
             self.runspeed += 0.18
             pygame.display.flip()
             await asyncio.sleep(0)
+
+        pygame.quit()
 
 if __name__ == "__main__":
     game = Mainmenu()
