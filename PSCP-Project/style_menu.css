@@ -1,0 +1,26 @@
+body {
+    background-image: url('images/gamebackground.jpg');
+    background-size: cover;
+}
+.container {
+    text-align: center;
+    padding-top: 100px;
+}
+.text {
+    font-size: 108px;
+    color: #FF7F00;
+    font-family: "capriolaregular";
+}
+.cartoon {
+    width: 100px;
+    position: absolute;
+    bottom: 30px;
+}
+.start-button {
+    background-color: #0080FF;
+    color: #fff;
+    font-size: 36px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
