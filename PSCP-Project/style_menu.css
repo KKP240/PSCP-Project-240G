@@ -6,9 +6,18 @@ body {
     text-align: center;
     padding-top: 100px;
 }
+.start {
+    text-align: center;
+    padding-top: 100px;
+}
 .text {
     font-size: 108px;
     color: #FF7F00;
+    font-family: "capriolaregular";
+}
+.text_body {
+    font-size: 30px;
+    color: chocolate;
     font-family: "capriolaregular";
 }
 .cartoon {
