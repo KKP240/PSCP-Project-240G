@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JustType</title>
-    <link rel="stylesheet" href="style_menu.css">
+    <title>Typing Test - JustType</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/icon-title.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+    </style>
 </head>
 <body>
     <div class="container">
         <img src="images/cartoon.png" class="cartoon" id="cartoon">
         <div class="text">JustType</div>
         <div class="text_body">Test your speed typing</div>
-    </div>
+        </div>
     <div class="start">
         <button class="start-button" id="start-button">Start</button>
     </div>
-    <audio autoplay loop>
+    <audio id="audio" autoplay loop>
         <source src="audio/mainmenu.mp3" type="audio/mpeg">
     </audio>
-    <script src="script_menu.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
