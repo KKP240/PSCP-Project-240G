@@ -1,7 +1,7 @@
 import pygame
 from pygame import mixer
 import webbrowser
-import asyncio
+import subprocess
 
 class Mainmenu:
     """MainPage"""
@@ -46,16 +46,20 @@ class Mainmenu:
         self.runspeed = 0
         self.running = True
 
-    async def runprogram(self):
+    def run_flask(self):
+        """runflask"""
+        subprocess.Popen(["python", "app.py"])
+
+    def runprogram(self):
         """runprogram"""
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.start_button.collidepoint(event.pos):
-                        webbrowser.open("justtype.vercel.app")
+                        self.run_flask()
+                        webbrowser.open("http://127.0.0.1:5000")
                 elif event.type == pygame.QUIT:
                     self.running = False
-
             self.screen.blit(self.background_image, (-100,-200))
             self.screen.blit(self.cartoon_img, (self.runspeed, (self.screen_h)-130))
             self.screen.blit(self.message_text, (420, 180))
@@ -63,10 +67,8 @@ class Mainmenu:
             self.screen.blit(self.text_startbutton, self.text_rect)
             self.runspeed += 0.18
             pygame.display.flip()
-            await asyncio.sleep(0)
-
         pygame.quit()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     game = Mainmenu()
-    asyncio.run(game.runprogram())
+    game.runprogram()
